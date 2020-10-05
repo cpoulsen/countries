@@ -1,0 +1,12 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Country @key(fields: "id") {
+  id: ID!
+  name: String!
+}
+
+extend type Query {
+  countries: [Country!]!
+}
