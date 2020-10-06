@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"github.com/cpoulsen/countries/domain/service/interface"
+	"github.com/cpoulsen/countries/domain/service"
 )
 
 // This file will not be regenerated automatically.
@@ -9,5 +9,5 @@ import (
 // It serves as dependency injection for your app, add any dependencies you require here.
 
 type Resolver struct {
-    CountryService countryInterface.CountryService
+    CountryService countryService.CountryServiceInterface
 }

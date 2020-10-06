@@ -10,8 +10,8 @@ import (
 
 	"github.com/cpoulsen/countries/graph/generated"
     "github.com/cpoulsen/countries/interface"
-	"github.com/cpoulsen/countries/domain/service/interface"
-    "github.com/cpoulsen/countries/domain/service/implementation"
+	"github.com/cpoulsen/countries/domain/service"
+    "github.com/cpoulsen/countries/domain/repo"
 )
 
 const defaultPort = "8080"
@@ -22,12 +22,13 @@ func main() {
 		port = defaultPort
 	}
 
-	var countryService countryInterface.CountryService
+	repo := repo.ProvideRepo()
 
-	countryService = countryImplementation.NewCountryService()
+	var countryServiceImpl countryService.CountryServiceInterface
+	countryServiceImpl = countryService.ProvideCountryService(repo)
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &interfaces.Resolver{
-    		CountryService: countryService,
+    		CountryService: countryServiceImpl,
     	}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))

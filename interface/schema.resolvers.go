@@ -15,7 +15,7 @@ func (r *queryResolver) Countries(ctx context.Context) ([]*model.Country, error)
 	var countriesSlice []*model.Country
 
 	var dbCountries []domainModel.Country
-	dbCountries = r.CountryService.GetAll()
+	dbCountries = r.CountryService.GetAllCountries()
 
 	for _, country := range dbCountries {
 		countriesSlice = append(countriesSlice, &model.Country{ID: country.ID, Name: country.Name})
